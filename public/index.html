@@ -1,0 +1,182 @@
+  <!-- Animación de carga -->
+  <div id="loader" class="loader-bg">
+    <div class="loader"></div>
+  </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor de Artículos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="header-bar">
+    <div style="position: absolute; left: 18px; top: 10px; font-size: 0.95rem; color: #bfc9d9; opacity: 0.85; z-index: 10;">
+      versión 1.3
+    </div>
+    <div class="header-logo-title" style="display: flex; align-items: center; gap: 4px;">
+      <img src="LGclient.svg" alt="Logo" style="height: 57px; width: auto; vertical-align: middle; margin-right: 10px; filter: brightness(0) invert(1);">
+      <h1 class="header-title" style="margin: 0;">Gestor de Artículos</h1>
+    </div>
+    <div class="header-actions">
+      <button id="btnAddArticulo">Añadir Artículo</button>
+      <button id="btnActualizarArticulos">Actualizar</button>
+      <button id="btnAlternar">Alternar</button>
+      <button id="btnDatos">Datos</button>
+      <button class="gear-btn" id="gearBtn">⚙️</button>
+    </div>
+  </div>  
+
+  <div id="datosGeneralesCard" class="datos-generales-card"></div>
+
+  <!-- Modal Seleccionar Cliente -->
+  <div id="modalSeleccionarCliente" class="modal">
+    <div class="modal-content">
+      <h3>Registrar Compra Cliente</h3>
+      <label for="clienteNombreInput">Cliente</label>
+      <input type="text" id="clienteNombreInput" autocomplete="off">
+      <label for="clienteModeloInput">Modelo</label>
+      <input type="text" id="clienteModeloInput">
+      <div style="display: flex; gap: 8px; align-items: flex-end; margin-bottom: 8px;">
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+          <label for="clienteInicialInput">Inicial</label>
+          <input type="number" id="clienteInicialInput">
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+          <label for="clienteFechaInput">Fecha</label>
+          <input type="text" id="clienteFechaInput" readonly>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+          <label for="clienteCuotasInput">Cuotas</label>
+          <input type="number" id="clienteCuotasInput">
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: flex-end; margin-bottom: 8px;">
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+          <label for="clienteWeppaInput">WEPPA</label>
+          <input type="number" id="clienteWeppaInput">
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+          <label for="clientePagoInput">Pago (Próximo martes)</label>
+          <input type="text" id="clientePagoInput" readonly>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelarSeleccionarCliente">Cancelar</button>
+        <button id="insertarSeleccionarCliente">Insertar</button>
+      </div>
+    </div>
+  </div>
+
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>MODELOS</th>
+        <th>BCV (bs)</th>
+        <th>DÓLAR BCV</th>
+        <th>INICIAL</th>
+        <th>CUOTAS</th>
+        <th>BALANCE</th>
+        <th>BIN</th>
+        <th>WEPPA</th>
+        <th>OPCIONES</th>
+      </tr>
+    </thead>
+    <tbody id="articulosBody"></tbody>
+  </table>
+
+  <table id="tablaClientes" style="display: none;">
+    <thead>
+      <tr>
+        <th>CLIENTE</th>
+        <th>MODELO</th>
+        <th>COMPRA</th>
+        <th>INICIAL</th>
+        <th>BALANCE</th>
+        <th>PAGO</th>
+        <th>CUOTA</th>
+        <th>WEPPA</th>
+        <th>BIN</th>
+        <th>BCV</th>
+        <th>OPCIONES</th>
+      </tr>
+    </thead>
+    <tbody id="clientesBody"></tbody>
+  </table>
+
+  <div id="modalArchivos" class="modal-archivos">
+    <div class="modal-archivos-content">
+      <h3>Opciones de archivo</h3>
+      <label for="cargarArchivo">Cargar archivo</label>
+      <input type="file" id="cargarArchivo">
+      <button id="descargarArchivo">Descargar archivo</button>
+      <button id="cerrarArchivos" class="cerrar-archivos">Cerrar</button>
+    </div>
+  </div>
+
+  <div id="modalCliente" class="modal">
+    <div class="modal-content">
+      <h3>Registrar Cliente</h3>
+      <label for="clienteNombre">Cliente</label>
+      <input type="text" id="clienteNombre">
+      <label for="clienteModelo">Modelo</label>
+      <input type="text" id="clienteModelo">
+      <label for="clienteCompra">Compra</label>
+      <input type="number" id="clienteCompra">
+      <label for="clienteInicial">Inicial</label>
+      <input type="number" id="clienteInicial">
+      <label for="clientePago">Pago</label>
+      <input type="number" id="clientePago">
+      <label for="clienteCuota">Cuotas</label>
+      <input type="number" id="clienteCuota">
+      <label for="clienteWeppa">WEPPA</label>
+      <input type="number" id="clienteWeppa">
+      <label for="clienteBin">BIN</label>
+      <input type="number" id="clienteBin">
+      <label for="clienteBcv">BCV</label>
+      <input type="number" id="clienteBcv">
+      <div class="modal-footer">
+        <button id="cancelarCliente">Cancelar</button>
+        <button id="guardarCliente">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Datos Generales -->
+  <div id="modalDatosGenerales" class="modal">
+    <div class="modal-content">
+      <h3>Datos Generales</h3>
+      <label for="dgEmpleado">Empleado</label>
+      <input type="text" id="dgEmpleado">
+      <label for="dgBin">BIN (TASA)</label>
+      <input type="number" id="dgBin">
+      <label for="dgBcv">BCV (TAZA)</label>
+      <input type="number" id="dgBcv">
+      <div class="modal-footer">
+        <button id="cancelarDatosGenerales">Cancelar</button>
+        <button id="guardarDatosGenerales">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalArticulo" class="modal">
+    <div class="modal-content">
+      <h3>Nuevo Artículo</h3>
+      <label for="articuloModelo">Modelo</label>
+      <input type="text" id="articuloModelo">
+      <label for="articuloBin">BIN</label>
+      <input type="number" id="articuloBin">
+      <label for="articuloWeppa">WEPPA</label>
+      <input type="number" id="articuloWeppa">
+      <div class="modal-footer">
+        <button id="cancelarArticulo">Cancelar</button>
+        <button id="agregarArticulo">Agregar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
